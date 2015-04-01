@@ -21,17 +21,17 @@ items:
           data: 
             modelFile: "../JVRC-1/main.wrl"
             currentBaseLink: "PELVIS"
-            rootPosition: [ 0.0413963414, 0.000181616704, 0.0940333385 ]
+            rootPosition: [ 0, 0, 0.854 ]
             rootAttitude: [ 
-              0.565424005, -0.0125139822, -0.824705459, 
-              0.0058130155, 0.999920524, -0.0111872294, 
-              0.824779912, 0.00153150244, 0.565451812 ]
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
             jointPositions: [ 
-               2.491536,  0.014273, -0.003464, -3.041826,  0.504564,  1.360445,  2.490455,  0.031264, -0.002901, 
-              -3.045891, -0.501021,  1.310491,  0.017990,  2.878274, -0.003599,  0.019525,  0.017707,  2.996885, 
-              -0.520872, -0.761651,  1.508038, -2.182746,  0.264640, -2.990384,  0.465690,  3.099607, -0.005098, 
-               2.411791,  0.686546,  2.999907, -1.986456, -0.492282,  0.674486, -1.506559, -2.242052, -1.251595, 
-               2.269450, -2.690822, -2.487268,  1.217938, -2.993205,  0.327215, -1.484359, -0.531348 ]
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
             initialRootPosition: [ 0, 0, 0.854 ]
             initialRootAttitude: [ 
               1, 0, 0, 
@@ -98,6 +98,7 @@ items:
             allLinkPositionOutputMode: false
             deviceStateOutput: true
             controllerThreads: true
+            dynamicsMode: Forward dynamics
             integrationMode: Runge Kutta
             gravity: [ 0, 0, -9.80665 ]
             staticFriction: 1
@@ -128,9 +129,9 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 3 ]
+      selected: [ 3, 5 ]
       checked: [ 2 ]
-      expanded: [ 1, 2 ]
+      expanded: [ 1, 2, 3 ]
   - 
     id: 3
     plugin: Base
@@ -186,13 +187,22 @@ views:
       dedicatedItemTreeViewChecks: false
   - 
     id: 5
+    name: "Task"
+    plugin: Base
+    class: TaskView
+    state: 
+      layoutMode: horizontal
+      isAutoMode: false
+      currentTask: Valve 1
+  - 
+    id: 6
     plugin: Body
     class: BodyLinkView
     mounted: true
     state: 
       showRotationMatrix: false
   - 
-    id: 6
+    id: 7
     plugin: Body
     class: JointSliderView
     mounted: true
@@ -206,7 +216,7 @@ views:
       labelOnLeft: true
       currentBodyItem: 2
   - 
-    id: 7
+    id: 8
     plugin: Body
     class: LinkSelectionView
     mounted: true
@@ -214,7 +224,7 @@ views:
       listingMode: "Link List"
       currentBodyItem: 2
   - 
-    id: 8
+    id: 9
     plugin: Python
     class: PythonConsoleView
     mounted: true
@@ -225,7 +235,7 @@ toolbars:
     frameRate: 100
     playbackFrameRate: 50
     idleLoopDrivenMode: false
-    currentTime: 26.88
+    currentTime: 0
     speedScale: 1
     syncToOngoingUpdates: true
     autoExpansion: true
@@ -292,8 +302,62 @@ Body:
     targetJoints: all
     checkSelfCollisions: true
     onlyTimeBarRange: false
-Media: 
-  "PulseAudioManager": 
-    keepStreamConnection: false
 OpenRTM: 
   "deleteUnmanagedRTCsOnStartingSimulation": false
+viewAreas: 
+  - 
+    type: embedded
+    tabs: true
+    contents: 
+      type: splitter
+      orientation: horizontal
+      sizes: [ 274, 1335 ]
+      children: 
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 464, 464 ]
+          children: 
+            - 
+              type: pane
+              views: [ 2 ]
+              current: 2
+            - 
+              type: pane
+              views: [ 1, 8 ]
+              current: 1
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 663, 265 ]
+          children: 
+            - 
+              type: splitter
+              orientation: horizontal
+              sizes: [ 578, 751 ]
+              children: 
+                - 
+                  type: pane
+                  views: [ 6, 7, 0 ]
+                  current: 6
+                - 
+                  type: pane
+                  views: [ 4 ]
+                  current: 4
+            - 
+              type: pane
+              views: [ 3, 9 ]
+              current: 3
+layoutOfToolBars: 
+  rows: 
+    - 
+      - { name: "FileBar", x: 0, priority: 0 }
+      - { name: "ScriptBar", x: 47, priority: 0 }
+      - { name: "TimeBar", x: 94, priority: 0 }
+      - { name: "SceneBar", x: 1057, priority: 0 }
+      - { name: "GraphBar", x: 1312, priority: 0 }
+      - { name: "SimulationBar", x: 1419, priority: 0 }
+    - 
+      - { name: "BodyBar", x: 0, priority: 0 }
+      - { name: "KinematicsBar", x: 260, priority: 0 }
+      - { name: "BodyMotionGenerationBar", x: 494, priority: 0 }

@@ -26,6 +26,7 @@ clean:
 	rm -rf $(OBJS) $(TARGET)
 
 install:
+	mkdir -p $(DESTDIR)/lib/choreonoid-1.5/rtc
 	$(INSTALL) $(TARGET) $(DESTDIR)/lib/choreonoid-1.5/rtc
 	$(INSTALL) $(MOTIONS) $(DESTDIR)/share/choreonoid-1.5/motion
 	$(INSTALL) $(CONFS) $(DESTDIR)/lib/choreonoid-1.5/rtc

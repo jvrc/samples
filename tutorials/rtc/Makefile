@@ -1,5 +1,5 @@
 CC     = g++
-LDFLAGS= `pkg-config choreonoid-body-plugin openrtm-aist --libs --cflags` -shared -fPIC -lboost_system -lboost_filesystem
+LDFLAGS= `pkg-config choreonoid-body-plugin openrtm-aist --libs --cflags` -lhrpsysBaseStub -shared -fPIC -lboost_system -lboost_filesystem
 CFLAGS = -Wall
 LIBS   =
 SRCS   = $(wildcard *.cpp)

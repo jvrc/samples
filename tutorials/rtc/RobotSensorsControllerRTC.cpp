@@ -39,10 +39,9 @@ RobotSensorsControllerRTC::RobotSensorsControllerRTC(RTC::Manager* manager)
       m_gyrometerIn("gyrometer", m_gyrometer),
       m_lfsensorIn("lfsensor", m_lfsensor),
       m_rfsensorIn("rfsensor", m_rfsensor),
+      m_lcameraIn("lcamera", m_lcamera),
+      m_rcameraIn("rcamera", m_rcamera),
       m_rangerIn("ranger", m_ranger)
-      // m_lcameraIn("lcamera", m_lcamera),
-      // m_rcameraIn("rcamera", m_rcamera),
-      // m_rangerIn("ranger", m_ranger)
 {
 
 }
@@ -61,11 +60,9 @@ RTC::ReturnCode_t RobotSensorsControllerRTC::onInitialize()
     addInPort("gyrometer", m_gyrometerIn);
     addInPort("lfsensor", m_lfsensorIn);
     addInPort("rfsensor", m_rfsensorIn);
-    // addInPort("lcamera", m_lcameraIn);
-    // addInPort("rcamera", m_rcameraIn);
+    addInPort("lcamera", m_lcameraIn);
+    addInPort("rcamera", m_rcameraIn);
     addInPort("ranger", m_rangerIn);
-
-    cout << "hoge" << endl;
 
     return RTC::RTC_OK;
 }

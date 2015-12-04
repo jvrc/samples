@@ -127,12 +127,13 @@ RTC::ReturnCode_t RobotTorqueControllerRTC::onExecute(RTC::UniqueId ec_id)
             m_angleIn.read();
     }
 
-    if(currentFrame > qseq->numFrames()){
-            m_torqueOut.write();
-            return RTC::RTC_OK;
-    }
+    MultiValueSeq::Frame frame;
 
-    MultiValueSeq::Frame frame = qseq->frame(currentFrame++);
+    if(currentFrame > qseq->numFrames()){
+      frame = oldFrame;
+    }else{
+      frame = qseq->frame(currentFrame++);
+    }
 
     for(int i=0; i < frame.size(); i++){
             double q_ref = frame[i];
@@ -141,13 +142,14 @@ RTC::ReturnCode_t RobotTorqueControllerRTC::onExecute(RTC::UniqueId ec_id)
             double dq = (q - q0[i]) / timeStep_;
             m_torque.data[i] = (q_ref - q) * pgain[i]/100.0 + (dq_ref - dq) * dgain[i]/100.0;
             q0[i] = q;
-
+#if 0
             cout << "i = " << i << " ";
             cout << "q_ref = " << frame[i] << " ";
             cout << "q = " << q << " ";
             cout << "dq_ref = " << dq_ref << " ";
             cout << "dq = " << dq << " ";
             cout << "torque = " << m_torque.data[i] << endl;
+#endif
     }
     oldFrame = frame;
 

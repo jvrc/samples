@@ -119,8 +119,8 @@ items:
               class: GLVisionSimulatorItem
               data: 
                 enabled: true
-                targetBodies: [ JVRC ]
-                targetSensors: [ ranger ]
+                targetBodies: [  ]
+                targetSensors: [  ]
                 maxFrameRate: 1000
                 maxLatency: 1
                 recordVisionData: false

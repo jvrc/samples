@@ -1,0 +1,27 @@
+--- RobotControllerRTC.cpp.orig	2015-12-03 11:11:10.351220019 +0900
++++ RobotControllerRTC.cpp	2015-12-03 11:13:11.787219170 +0900
+@@ -8,6 +8,9 @@
+  */
+ 
+ #include "RobotControllerRTC.h"
++#include <iostream>
++
++using namespace std;
+ 
+ // Module specification
+ // <rtc-template block="module_spec">
+@@ -109,6 +112,14 @@
+ 
+ RTC::ReturnCode_t RobotControllerRTC::onExecute(RTC::UniqueId ec_id)
+ {
++  if(m_angleIn.isNew()){
++    m_angleIn.read();
++  }
++
++  for(size_t i=0; i < m_angle.data.length(); ++i){
++    cout << "m_angle.data[" << i << "] is " << m_angle.data[i] << std::endl;
++  }
++
+   return RTC::RTC_OK;
+ }
+ 

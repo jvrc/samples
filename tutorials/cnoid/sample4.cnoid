@@ -55,7 +55,7 @@ items:
               class: BodyRTCItem
               data: 
                 isImmediateMode: true
-                moduleName: "RobotSensorsControllerRTC"
+                moduleName: "RobotControllerRTC"
                 confFileName: "RobotSensorsJVRC.conf"
                 configurationMode: Use Configuration File
                 AutoConnect: true
@@ -253,7 +253,7 @@ toolbars:
   "TimeBar": 
     minTime: 0
     maxTime: 31.12
-    frameRate: 100
+    frameRate: 1000
     playbackFrameRate: 50
     idleLoopDrivenMode: false
     currentTime: 0

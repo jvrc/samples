@@ -1,0 +1,54 @@
+# RobotControllerRTC CMake config file
+#
+# This file sets the following variables:
+# RobotControllerRTC_FOUND - Always TRUE.
+# RobotControllerRTC_INCLUDE_DIRS - Directories containing the RobotControllerRTC include files.
+# RobotControllerRTC_IDL_DIRS - Directories containing the RobotControllerRTC IDL files.
+# RobotControllerRTC_LIBRARIES - Libraries needed to use RobotControllerRTC.
+# RobotControllerRTC_DEFINITIONS - Compiler flags for RobotControllerRTC.
+# RobotControllerRTC_VERSION - The version of RobotControllerRTC found.
+# RobotControllerRTC_VERSION_MAJOR - The major version of RobotControllerRTC found.
+# RobotControllerRTC_VERSION_MINOR - The minor version of RobotControllerRTC found.
+# RobotControllerRTC_VERSION_REVISION - The revision version of RobotControllerRTC found.
+# RobotControllerRTC_VERSION_CANDIDATE - The candidate version of RobotControllerRTC found.
+
+message(STATUS "Found RobotControllerRTC-@PROJECT_VERSION@")
+set(RobotControllerRTC_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(RobotControllerRTC_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(RobotControllerRTC_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(RobotControllerRTC_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(RobotControllerRTC_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(RobotControllerRTC_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(RobotControllerRTC_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(RobotControllerRTC_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(RobotControllerRTC_VERSION @PROJECT_VERSION@)
+set(RobotControllerRTC_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(RobotControllerRTC_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(RobotControllerRTC_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(RobotControllerRTC_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+

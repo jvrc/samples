@@ -55,7 +55,7 @@ items:
               class: BodyRTCItem
               data: 
                 isImmediateMode: true
-                moduleName: "RobotTorqueControllerRTC"
+                moduleName: "RobotControllerRTC"
                 confFileName: ""
                 configurationMode: Create Default Port
                 AutoConnect: true

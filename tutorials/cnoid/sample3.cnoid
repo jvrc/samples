@@ -138,7 +138,7 @@ views:
     mounted: true
     state: 
       selected: [ [ 4, "motion" ] ]
-      checked: [ 2 ]
+      checked: [ 2, 3 ]
       expanded: [ 1, 2, 3, 4, [ 4, "motion" ] ]
   - 
     id: 3
@@ -254,7 +254,7 @@ toolbars:
     frameRate: 1000
     playbackFrameRate: 50
     idleLoopDrivenMode: false
-    currentTime: 14.383
+    currentTime: 0.0
     speedScale: 1
     syncToOngoingUpdates: true
     autoExpansion: true

@@ -27,23 +27,23 @@ items:
               0, 1, 0, 
               0, 0, 1 ]
             jointPositions: [ 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000 ]
             initialRootPosition: [ 0, 0, 0.854 ]
             initialRootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
               0, 0, 1 ]
             initialJointPositions: [ 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
-            zmp: [ 3.17700811e-316, 7.40802029e-320, 3.17700969e-316 ]
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000 ]
+            zmp: [ 5.13828272e-322, 6.94379878e-310, 4.94065646e-324 ]
             collisionDetection: true
             selfCollisionDetection: false
             isEditable: true
@@ -55,15 +55,16 @@ items:
               class: BodyRTCItem
               data: 
                 isImmediateMode: true
+                controllerOptions: ""
                 moduleName: "RobotControllerRTC"
                 confFileName: ""
-                configurationMode: Create Default Port
+                configurationMode: "Create Default Port"
                 AutoConnect: true
-                InstanceName: JVRC
+                InstanceName: "JVRC"
                 bodyPeriodicRate: 0
             - 
               id: 4
-              name: "PoseSeq"
+              name: "SampleMotion"
               plugin: PoseSeq
               class: PoseSeqItem
               data: 
@@ -100,14 +101,16 @@ items:
           class: AISTSimulatorItem
           data: 
             realtimeSync: false
-            recording: tail
-            timeRangeMode: Unlimited
-            onlyActiveControlPeriod: true
+            recording: "tail"
+            timeRangeMode: "Active control period"
             timeLength: 180
             allLinkPositionOutputMode: false
             deviceStateOutput: true
             controllerThreads: true
-            integrationMode: Runge Kutta
+            recordCollisionData: false
+            controllerOptions: ""
+            dynamicsMode: "Forward dynamics"
+            integrationMode: "Runge Kutta"
             gravity: [ 0, 0, -9.80665 ]
             staticFriction: 1
             slipFriction: 1
@@ -119,6 +122,25 @@ items:
             contactCorrectionVelocityRatio: 1
             kinematicWalking: false
             2Dmode: false
+          children: 
+            - 
+              id: 7
+              name: "GLVisionSimulator"
+              plugin: Body
+              class: GLVisionSimulatorItem
+              data: 
+                enabled: true
+                maxFrameRate: 1000
+                maxLatency: 1
+                recordVisionData: false
+                useThread: true
+                useThreadsForSensors: true
+                bestEffort: false
+                allSceneObjects: false
+                rangeSensorPrecisionRatio: 2
+                depthError: 0
+                enableHeadLight: true
+                enableAdditionalLights: true
 views: 
   - 
     id: 0
@@ -139,7 +161,7 @@ views:
     state: 
       selected: [ [ 4, "motion" ] ]
       checked: [ 2, 3 ]
-      expanded: [ 1, 2, 3, 4, [ 4, "motion" ] ]
+      expanded: [ 1, 2, 3, 4, [ 4, "motion" ], 6 ]
   - 
     id: 3
     plugin: Base
@@ -162,6 +184,7 @@ views:
       worldLightIntensity: 0.5
       worldLightAmbient: 0.3
       additionalLights: true
+      fog: true
       floorGrid: true
       floorGridSpan: 10
       floorGridInterval: 0.5
@@ -179,15 +202,21 @@ views:
       showFPS: false
       enableNewDisplayListDoubleRendering: false
       useBufferForPicking: true
-      camera: 
-        current: Perspective
-        eye: [ 2.81880332, 1.11653675, 0.696194198 ]
-        direction: [ -0.973810098, -0.221495619, -0.0513184637 ]
-        up: [ -0.0500403743, -0.0113818123, 0.99868234 ]
-        fieldOfView: 0.6978
-        near: 0.01
-        far: 100
-        orthoHeight: 20
+      cameras: 
+        - 
+          camera: [ System, Perspective ]
+          isCurrent: true
+          fieldOfView: 0.6978
+          near: 0.01
+          far: 100
+          eye: [ 2.61502034, 0.586881531, 0.941699185 ]
+          direction: [ -0.973810098, -0.221495619, -0.0513184637 ]
+          up: [ -0.0500403743, -0.0113818123, 0.99868234 ]
+        - 
+          camera: [ System, Orthographic ]
+          orthoHeight: 20
+          near: 0.01
+          far: 100
       backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
       gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
       xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
@@ -254,7 +283,7 @@ toolbars:
     frameRate: 1000
     playbackFrameRate: 50
     idleLoopDrivenMode: false
-    currentTime: 0.0
+    currentTime: 0
     speedScale: 1
     syncToOngoingUpdates: true
     autoExpansion: true
@@ -271,6 +300,7 @@ toolbars:
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "BodyMotionGenerationBar": 
+    autoGenerationForNewBody: true
     balancer: false
     autoGeneration: true
     timeScaleRatio: 1
@@ -317,6 +347,7 @@ Body:
         showCenterOfMass: false
         showPpcom: false
         showZmp: false
+    staticModelEditing: false
   "KinematicFaultChecker": 
     checkJointPositions: true
     angleMargin: 0
@@ -326,8 +357,5 @@ Body:
     targetJoints: all
     checkSelfCollisions: true
     onlyTimeBarRange: false
-Media: 
-  "PulseAudioManager": 
-    keepStreamConnection: false
 OpenRTM: 
   "deleteUnmanagedRTCsOnStartingSimulation": false

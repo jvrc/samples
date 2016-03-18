@@ -27,22 +27,22 @@ items:
               0, 1, 0, 
               0, 0, 1 ]
             jointPositions: [ 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000 ]
             initialRootPosition: [ 0, 0, 0.854 ]
             initialRootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
               0, 0, 1 ]
             initialJointPositions: [ 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000,  0.000000 ]
             zmp: [ 0, 0, 0 ]
             collisionDetection: true
             selfCollisionDetection: false
@@ -55,11 +55,12 @@ items:
               class: BodyRTCItem
               data: 
                 isImmediateMode: true
+                controllerOptions: ""
                 moduleName: "RobotControllerRTC"
                 confFileName: "RobotSensorsJVRC.conf"
-                configurationMode: Use Configuration File
+                configurationMode: "Use Configuration File"
                 AutoConnect: true
-                InstanceName: JVRC
+                InstanceName: "JVRC"
                 bodyPeriodicRate: 0
         - 
           id: 4
@@ -91,15 +92,16 @@ items:
           class: AISTSimulatorItem
           data: 
             realtimeSync: false
-            recording: tail
-            timeRangeMode: Unlimited
-            onlyActiveControlPeriod: true
+            recording: "tail"
+            timeRangeMode: "Active control period"
             timeLength: 180
             allLinkPositionOutputMode: false
             deviceStateOutput: true
             controllerThreads: true
-            dynamicsMode: Forward dynamics
-            integrationMode: Runge Kutta
+            recordCollisionData: false
+            controllerOptions: ""
+            dynamicsMode: "Forward dynamics"
+            integrationMode: "Runge Kutta"
             gravity: [ 0, 0, -9.80665 ]
             staticFriction: 1
             slipFriction: 1
@@ -119,8 +121,6 @@ items:
               class: GLVisionSimulatorItem
               data: 
                 enabled: true
-                targetBodies: [  ]
-                targetSensors: [  ]
                 maxFrameRate: 1000
                 maxLatency: 1
                 recordVisionData: false
@@ -175,6 +175,7 @@ views:
       worldLightIntensity: 0.5
       worldLightAmbient: 0.3
       additionalLights: true
+      fog: true
       floorGrid: true
       floorGridSpan: 10
       floorGridInterval: 0.5
@@ -192,15 +193,21 @@ views:
       showFPS: false
       enableNewDisplayListDoubleRendering: false
       useBufferForPicking: true
-      camera: 
-        current: Perspective
-        eye: [ 4, 2, 1.5 ]
-        direction: [ -0.888888889, -0.444444444, -0.111111111 ]
-        up: [ -0.0993807989, -0.0496903995, 0.99380799 ]
-        fieldOfView: 0.6978
-        near: 0.01
-        far: 100
-        orthoHeight: 20
+      cameras: 
+        - 
+          camera: [ System, Perspective ]
+          isCurrent: true
+          fieldOfView: 0.6978
+          near: 0.01
+          far: 100
+          eye: [ 4, 2, 1.5 ]
+          direction: [ -0.888888889, -0.444444444, -0.111111111 ]
+          up: [ -0.0993807989, -0.0496903995, 0.99380799 ]
+        - 
+          camera: [ System, Orthographic ]
+          orthoHeight: 20
+          near: 0.01
+          far: 100
       backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
       gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
       xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
@@ -214,7 +221,6 @@ views:
     state: 
       layoutMode: horizontal
       isAutoMode: false
-      currentTask: Valve 1
   - 
     id: 6
     plugin: Body
@@ -273,6 +279,7 @@ toolbars:
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "BodyMotionGenerationBar": 
+    autoGenerationForNewBody: true
     balancer: false
     autoGeneration: false
     timeScaleRatio: 1
@@ -314,6 +321,7 @@ Body:
         showCenterOfMass: false
         showPpcom: false
         showZmp: false
+    staticModelEditing: false
   "KinematicFaultChecker": 
     checkJointPositions: true
     angleMargin: 0
@@ -325,60 +333,3 @@ Body:
     onlyTimeBarRange: false
 OpenRTM: 
   "deleteUnmanagedRTCsOnStartingSimulation": false
-viewAreas: 
-  - 
-    type: embedded
-    tabs: true
-    contents: 
-      type: splitter
-      orientation: horizontal
-      sizes: [ 198, 968 ]
-      children: 
-        - 
-          type: splitter
-          orientation: vertical
-          sizes: [ 306, 305 ]
-          children: 
-            - 
-              type: pane
-              views: [ 2 ]
-              current: 2
-            - 
-              type: pane
-              views: [ 1, 8 ]
-              current: 1
-        - 
-          type: splitter
-          orientation: vertical
-          sizes: [ 436, 175 ]
-          children: 
-            - 
-              type: splitter
-              orientation: horizontal
-              sizes: [ 418, 544 ]
-              children: 
-                - 
-                  type: pane
-                  views: [ 6, 7, 0 ]
-                  current: 6
-                - 
-                  type: pane
-                  views: [ 4 ]
-                  current: 4
-            - 
-              type: pane
-              views: [ 3, 9 ]
-              current: 3
-layoutOfToolBars: 
-  rows: 
-    - 
-      - { name: "FileBar", x: 0, priority: 0 }
-      - { name: "ScriptBar", x: 47, priority: 0 }
-      - { name: "TimeBar", x: 94, priority: 0 }
-      - { name: "GraphBar", x: 1066, priority: 0 }
-    - 
-      - { name: "SceneBar", x: 0, priority: 0 }
-      - { name: "SimulationBar", x: 255, priority: 0 }
-      - { name: "BodyBar", x: 452, priority: 0 }
-      - { name: "KinematicsBar", x: 712, priority: 0 }
-      - { name: "BodyMotionGenerationBar", x: 946, priority: 0 }
